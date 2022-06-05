@@ -12,53 +12,56 @@ public class Main {
 
         Scanner sc = new Scanner(inputFromFile);
 
-        String[] nums = sc.nextLine().split(" ");
-        String operator = nums[1];
-        double resultNumber;
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
+            resultToFile.write(str+" = ");
+            String[] nums = str.split(" ");
+            String operator = nums[1];
+            double resultNumber;
 
-        try {
+            try {
 
-            Double.parseDouble(nums[0]);
-            Double.parseDouble(nums[2]);
+                Double.parseDouble(nums[0]);
+                Double.parseDouble(nums[2]);
 
-            if (nums[2].equals("0") && operator.equals("/")) {
-                resultToFile.println("Error! Division by zero");
-                resultToFile.close();
-            }
-            else {
+                if (nums[2].equals("0") && operator.equals("/")) {
+                    resultToFile.println("Error! Division by zero");
+                    resultToFile.flush();
+                    continue;
+                } else {
 
-                switch (operator) {
-                    case "+":
-                        resultNumber = Double.parseDouble(nums[0]) + Double.parseDouble(nums[2]);
-                        resultToFile.println(resultNumber);
-                        resultToFile.close();
-                        break;
-                    case "-":
-                        resultNumber = Double.parseDouble(nums[0]) - Double.parseDouble(nums[2]);
-                        resultToFile.println(resultNumber);
-                        resultToFile.close();
-                        break;
-                    case "*":
-                        resultNumber = Double.parseDouble(nums[0]) * Double.parseDouble(nums[2]);
-                        resultToFile.println(resultNumber);
-                        resultToFile.close();
-                        break;
-                    case "/":
-                        resultNumber = Double.parseDouble(nums[0]) / Double.parseDouble(nums[2]);
-                        resultToFile.println(resultNumber);
-                        resultToFile.close();
-                        break;
-                    default:
-                        resultToFile.println("Operation Error!");
-                        resultToFile.close();
-                        break;
-
+                    switch (operator) {
+                        case "+":
+                            resultNumber = Double.parseDouble(nums[0]) + Double.parseDouble(nums[2]);
+                            resultToFile.println(resultNumber);
+                            resultToFile.flush();
+                            continue;
+                        case "-":
+                            resultNumber = Double.parseDouble(nums[0]) - Double.parseDouble(nums[2]);
+                            resultToFile.println(resultNumber);
+                            resultToFile.flush();
+                            continue;
+                        case "*":
+                            resultNumber = Double.parseDouble(nums[0]) * Double.parseDouble(nums[2]);
+                            resultToFile.println(resultNumber);
+                            resultToFile.flush();
+                            continue;
+                        case "/":
+                            resultNumber = Double.parseDouble(nums[0]) / Double.parseDouble(nums[2]);
+                            resultToFile.println(resultNumber);
+                            resultToFile.flush();
+                            continue;
+                        default:
+                            resultToFile.println("Operation Error!");
+                            resultToFile.flush();
+                            continue;
+                    }
                 }
+            } catch (Exception format) {
+                resultToFile.println("Error! Not number");
+                resultToFile.flush();
+                continue;
             }
-        }
-        catch (Exception format) {
-            resultToFile.println("Error! Not number");
-            resultToFile.close();
         }
     }
 }
